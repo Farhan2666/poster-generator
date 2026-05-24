@@ -10,7 +10,7 @@ export class GeminiProvider implements AIProvider {
   }
 
   async generateText(prompt: string, model: string, options?: AIOptions): Promise<AIResponse> {
-const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${this.apiKey}`
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${this.apiKey}`;
 
     const res = await fetch(url, {
       method: 'POST',
@@ -42,7 +42,7 @@ const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:ge
   }
 
   async analyzeImage(images: string[], prompt: string, model: string, options?: AIOptions): Promise<AIResponse> {
-const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${this.apiKey}`
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${this.apiKey}`;
 
     const parts: Array<{ text?: string; inlineData?: { mimeType: string; data: string } }> = [
       { text: prompt },
