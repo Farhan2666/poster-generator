@@ -71,6 +71,13 @@ body {
   animation-delay: -14s;
 }
 
+@media (max-width: 640px) {
+  .animated-bg .orb:nth-child(1) { width: 250px; height: 250px; }
+  .animated-bg .orb:nth-child(2) { width: 200px; height: 200px; }
+  .animated-bg .orb:nth-child(3) { width: 150px; height: 150px; }
+  .particle { font-size: 10px; }
+}
+
 /* ─── Floating Particles ─── */
 .particles-container {
   position: fixed;

@@ -167,7 +167,7 @@ export default function SettingsPage() {
             Konfigurasi mapping task ke provider ada di <code className="bg-black/30 px-1.5 py-0.5 rounded text-primary">config/ai.config.json</code>.
             Sistem akan otomatis fallback jika provider tidak memiliki capability yang diperlukan.
           </p>
-          <div className="grid grid-cols-2 gap-2 pt-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
             {[
               ['analyze-image', 'Gemini (vision)'],
               ['hook', 'DeepSeek'],

@@ -58,11 +58,11 @@ export default function GeneratePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold gradient-text">Buat Video Baru</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold gradient-text">Buat Video Baru</h1>
         <p className="text-white/40 mt-1">Pilih produk dan template, AI akan membuatkan 3 variasi konten</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Product Selection */}
         <div className="glass-card rounded-2xl p-5">
           <h2 className="font-semibold mb-1">1. Pilih Produk</h2>
@@ -143,7 +143,7 @@ export default function GeneratePage() {
       </div>
 
       {/* Action Bar */}
-      <div className="glass-card rounded-2xl p-5 flex items-center justify-between">
+      <div className="glass-card rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
           <p className="text-sm text-white/40">
             {!selectedProduct && !selectedTemplate && 'Pilih produk dan template untuk memulai'}

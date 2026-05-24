@@ -41,12 +41,12 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold gradient-text">Dashboard</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold gradient-text">Dashboard</h1>
         <p className="text-white/40 mt-1">Ringkasan aktivitas video generator kamu</p>
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {STAT_CARDS.map((card) => {
           const value = stats ? String((stats as any)[card.key] ?? 0) : loading ? '...' : '0';
           return (

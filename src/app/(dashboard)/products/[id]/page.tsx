@@ -147,7 +147,7 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Content */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Original Images */}
         <div className="glass-card rounded-2xl p-5">
           <h2 className="font-semibold mb-3">Foto Produk</h2>
@@ -240,7 +240,7 @@ export default function ProductDetailPage() {
       {/* Meta */}
       <div className="glass-card rounded-2xl p-5">
         <h2 className="font-semibold mb-4">Info</h2>
-        <div className="grid grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
           <div className="bg-white/[0.02] rounded-xl p-3">
             <span className="text-white/30 text-[10px] uppercase tracking-wide">Dibuat</span>
             <p className="text-white/60 mt-1">{new Date(product.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>

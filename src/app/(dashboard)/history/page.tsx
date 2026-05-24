@@ -73,7 +73,33 @@ export default function HistoryPage() {
         </div>
       ) : (
         <div className="glass-card rounded-2xl overflow-hidden">
-          <table className="w-full text-sm">
+          {/* Mobile card list */}
+          <div className="block sm:hidden divide-y divide-white/[0.04]">
+            {videos.map(v => (
+              <div key={v.id} className="p-4 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] text-white/40">{v.id.slice(0, 8)}...</span>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${STATUS_STYLES[v.status] || 'bg-white/[0.05] text-white/40'}`}>
+                    {v.status}{v.status === 'processing' && ` ${v.progress}%`}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-white/60 capitalize">{v.variation?.replace(/_/g, ' ')}</span>
+                  <span className="text-white/30">{v.duration_sec || '-'}s</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] text-white/30">{new Date(v.created_at).toLocaleDateString('id-ID')}</span>
+                  {v.output_url ? (
+                    <a href={v.output_url} target="_blank" className="text-accent text-xs hover:underline">Download</a>
+                  ) : (
+                    <span className="text-white/20 text-xs">-</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Desktop table */}
+          <table className="hidden sm:table w-full text-sm">
             <thead>
               <tr className="border-b border-white/[0.06] text-white/30 text-xs">
                 <th className="text-left p-4 font-medium">Video</th>

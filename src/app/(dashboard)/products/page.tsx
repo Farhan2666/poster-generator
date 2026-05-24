@@ -42,9 +42,9 @@ export default function ProductsPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-bold gradient-text">Product Library</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold gradient-text">Product Library</h1>
           <p className="text-white/40 mt-1">Kelola koleksi poster aesthetic kamu</p>
         </div>
         <Link
@@ -57,9 +57,9 @@ export default function ProductsPage() {
 
       {/* Filters */}
       <div className="glass-card rounded-2xl p-4">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Search */}
-          <div className="relative flex-1">
+          <div className="relative flex-1 min-w-[140px]">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-white/20">C</span>
             <input
               type="text"
@@ -149,7 +149,7 @@ export default function ProductsPage() {
           <div className="flex items-center justify-between">
             <p className="text-xs text-white/30">{filtered.length} dari {products.length} produk</p>
           </div>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((product) => (
               <Link
                 key={product.id}
