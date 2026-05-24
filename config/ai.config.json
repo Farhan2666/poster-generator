@@ -7,34 +7,32 @@
       "temperature": 0.3
     },
     "hook": {
-      "provider": "deepseek",
-      "model": "deepseek-chat",
+      "provider": "gemini",
+      "model": "gemini-2.0-flash",
       "maxTokens": 200,
       "temperature": 0.8
     },
     "script": {
-      "provider": "deepseek",
-      "model": "deepseek-chat",
+      "provider": "gemini",
+      "model": "gemini-2.0-flash",
       "maxTokens": 2000,
       "temperature": 0.7
     },
     "scene": {
       "provider": "gemini",
-      "model": "gemini-1.5-pro",
+      "model": "gemini-2.0-flash",
       "maxTokens": 800,
       "temperature": 0.5
     },
     "cta": {
-      "provider": "deepseek",
-      "model": "deepseek-chat",
+      "provider": "gemini",
+      "model": "gemini-2.0-flash",
       "maxTokens": 100,
       "temperature": 0.6
     }
   },
   "fallbackStrategy": {
     "maxRetries": 1,
-    "fallbackProvider": "openai",
-    "fallbackModel": "gpt-4o-mini",
     "timeoutMs": 15000
   }
 }
