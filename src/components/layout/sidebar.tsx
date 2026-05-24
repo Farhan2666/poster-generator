@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { createClient } from '@/lib/supabase/auth-client';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Dashboard', icon: '◈' },
@@ -14,6 +16,16 @@ const NAV_ITEMS = [
 
 export default function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    setLoggingOut(true);
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push('/auth/login');
+    router.refresh();
+  }
 
   const nav = (
     <>
@@ -52,15 +64,14 @@ export default function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose:
         })}
       </nav>
       <div className="px-3 pt-4 border-t border-white/[0.06] mt-auto">
-        <div className="flex items-center gap-2 px-2 py-2">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-[10px] font-bold text-white">
-            P
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs text-white/60 font-medium truncate">Poster AI</p>
-            <p className="text-[10px] text-white/20">MVP v1.0</p>
-          </div>
-        </div>
+        <button
+          onClick={handleLogout}
+          disabled={loggingOut}
+          className="w-full flex items-center gap-2 px-2 py-2 rounded-xl text-sm text-white/30 hover:text-danger transition-all hover:bg-danger/5"
+        >
+          <span>{loggingOut ? '...' : '✕'}</span>
+          <span className="text-xs">{loggingOut ? 'Keluar...' : 'Keluar'}</span>
+        </button>
       </div>
     </>
   );

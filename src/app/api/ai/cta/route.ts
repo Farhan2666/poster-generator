@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { router } from '@/lib/ai/router';
 import { buildUserPrompt, buildSystemPrompt } from '@/lib/ai/prompt-engine';
-import { initAIProviders } from '@/lib/ai/init';
-
-initAIProviders();
+import { executeWithKey } from '@/lib/ai/execute-with-key';
 
 export async function POST(req: NextRequest) {
   try {
-    const { variation, hook, script } = await req.json();
+    const { variation, hook, script, apiKey } = await req.json();
 
     const validVariations = ['hard_selling', 'soft_selling', 'aesthetic'];
     const v = validVariations.includes(variation) ? variation : 'soft_selling';
@@ -18,9 +15,9 @@ export async function POST(req: NextRequest) {
       script ? `Script: ${typeof script === 'string' ? script : JSON.stringify(script).slice(0, 500)}` : '',
     ].filter(Boolean).join('\n');
 
-    const response = await router.execute('cta', {
+    const response = await executeWithKey('cta', {
       prompt: `${systemPrompt}\n\n${context}`,
-    });
+    }, apiKey);
 
     let cta;
     try {
