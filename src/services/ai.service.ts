@@ -44,10 +44,14 @@ export class AIService {
     return res.json() as Promise<{ cta: string }>;
   }
 
-  async generateFull(productId: string, templateId: string) {
+  async generateFull(productId: string, templateId: string, images?: string[]) {
     const variations: Variation[] = ['hard_selling', 'soft_selling', 'aesthetic'];
 
-    const analysis = await this.analyzeImage(productId, []);
+    if (!images || images.length === 0) {
+      throw new Error('generateFull membutuhkan array images untuk analisis produk');
+    }
+
+    const analysis = await this.analyzeImage(productId, images);
 
     const results = await Promise.all(
       variations.map(async (variation) => {
