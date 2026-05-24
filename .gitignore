@@ -28,3 +28,4 @@ public/processed/
 # OS
 .DS_Store
 Thumbs.db
+.vercel

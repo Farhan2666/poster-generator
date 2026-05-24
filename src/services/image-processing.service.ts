@@ -4,8 +4,9 @@ import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
 
-const TEMP_DIR = path.join(process.cwd(), 'tmp', 'processing');
-const PUBLIC_DIR = path.join(process.cwd(), 'public', 'processed');
+const isVercel = !!process.env.VERCEL;
+const TEMP_DIR = isVercel ? '/tmp/processing' : path.join(process.cwd(), 'tmp', 'processing');
+const PUBLIC_DIR = isVercel ? '/tmp/processed' : path.join(process.cwd(), 'public', 'processed');
 
 export class ImageProcessingService {
   async processProduct(productId: string): Promise<{

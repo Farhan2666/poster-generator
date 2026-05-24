@@ -5,8 +5,9 @@ import crypto from 'crypto';
 import { execSync } from 'child_process';
 import { Scene } from '@/types/video';
 
-const TEMP_DIR = path.join(process.cwd(), 'tmp', 'render');
-const OUTPUT_DIR = path.join(process.cwd(), 'public', 'renders');
+const isVercel = !!process.env.VERCEL;
+const TEMP_DIR = isVercel ? '/tmp/render' : path.join(process.cwd(), 'tmp', 'render');
+const OUTPUT_DIR = isVercel ? '/tmp/renders' : path.join(process.cwd(), 'public', 'renders');
 
 const TEMPLATE_BG_COLORS: Record<string, string[][]> = {
   'coquette-pink-room': [['#fce4ec', '#f8bbd0', '#f48fb1'], ['#ffffff', '#fce4ec', '#f8bbd0']],
