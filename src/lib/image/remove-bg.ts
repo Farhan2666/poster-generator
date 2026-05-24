@@ -1,18 +1,21 @@
-import { removeBackground } from '@imgly/background-removal';
 import sharp from 'sharp';
 
+/**
+ * Standardize image for video processing — resize, optimize, no background removal.
+ * Free, lightweight, works on Vercel serverless.
+ */
 export async function removeBackgroundFromImage(
   imageBuffer: Buffer,
   outputPath: string
 ): Promise<Buffer> {
-  const blob = new Blob([new Uint8Array(imageBuffer)], { type: 'image/png' });
-
-  const result = await removeBackground(blob, {
-    model: 'isnet_quint8',
-    output: { format: 'image/png' },
-  });
-
-  const buffer = Buffer.from(await result.arrayBuffer());
+  // Standardize: resize to max 1080px, convert to PNG, optimize
+  const buffer = await sharp(imageBuffer)
+    .resize(1080, 1920, {
+      fit: 'inside',
+      withoutEnlargement: true,
+    })
+    .png({ quality: 90 })
+    .toBuffer();
 
   await sharp(buffer).png().toFile(outputPath);
 
