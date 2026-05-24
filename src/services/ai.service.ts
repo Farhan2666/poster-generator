@@ -7,9 +7,11 @@ interface AnalysisResult {
   [key: string]: any;
 }
 
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+
 export class AIService {
   async analyzeImage(productId: string, images: string[]) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/ai/analyze-image`, {
+    const res = await fetch(`${BASE_URL}/api/ai/analyze-image`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ images }),
@@ -18,7 +20,7 @@ export class AIService {
   }
 
   async generateHook(productId: string, variation: Variation, analysis?: AnalysisResult) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/ai/hook`, {
+    const res = await fetch(`${BASE_URL}/api/ai/hook`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ variation, analysis }),
@@ -27,7 +29,7 @@ export class AIService {
   }
 
   async generateScript(productId: string, templateId: string, variation: Variation, analysis?: AnalysisResult, hook?: string) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/ai/script`, {
+    const res = await fetch(`${BASE_URL}/api/ai/script`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ variation, analysis, hook }),
@@ -36,7 +38,7 @@ export class AIService {
   }
 
   async generateCta(variation: Variation, hook?: string, script?: any) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/ai/cta`, {
+    const res = await fetch(`${BASE_URL}/api/ai/cta`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ variation, hook, script }),
