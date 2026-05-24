@@ -17,27 +17,30 @@ const PARTICLES = ['✦', '♥', '✧', '⋆', '○', '◇', '☆', '♡', '✶'
 
 export default function AnimatedBackground() {
   const [themeIndex, setThemeIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const currentTheme = THEMES[themeIndex];
 
   useEffect(() => {
+    setMounted(true);
     const interval = setInterval(() => {
       setThemeIndex(prev => (prev + 1) % THEMES.length);
     }, 8000);
     return () => clearInterval(interval);
   }, []);
 
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    id: i,
-    char: PARTICLES[i % PARTICLES.length],
-    left: `${Math.random() * 100}%`,
-    size: `${10 + Math.random() * 12}px`,
-    delay: `${Math.random() * 15}s`,
-    duration: `${12 + Math.random() * 10}s`,
-  }));
+  const particles = mounted
+    ? Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        char: PARTICLES[i % PARTICLES.length],
+        left: `${Math.random() * 100}%`,
+        size: `${10 + Math.random() * 12}px`,
+        delay: `${Math.random() * 15}s`,
+        duration: `${12 + Math.random() * 10}s`,
+      }))
+    : [];
 
   return (
     <>
-      {/* Orbs */}
       <div className="animated-bg">
         {currentTheme.orbs.map((color, i) => (
           <div
@@ -48,26 +51,26 @@ export default function AnimatedBackground() {
         ))}
       </div>
 
-      {/* Floating Particles */}
-      <div className="particles-container">
-        {particles.map(p => (
-          <span
-            key={p.id}
-            className="particle"
-            style={{
-              left: p.left,
-              fontSize: p.size,
-              animationDelay: p.delay,
-              animationDuration: p.duration,
-              color: currentTheme.colors[p.id % currentTheme.colors.length],
-            }}
-          >
-            {p.char}
-          </span>
-        ))}
-      </div>
+      {mounted && (
+        <div className="particles-container">
+          {particles.map(p => (
+            <span
+              key={p.id}
+              className="particle"
+              style={{
+                left: p.left,
+                fontSize: p.size,
+                animationDelay: p.delay,
+                animationDuration: p.duration,
+                color: currentTheme.colors[p.id % currentTheme.colors.length],
+              }}
+            >
+              {p.char}
+            </span>
+          ))}
+        </div>
+      )}
 
-      {/* Subtle grid overlay */}
       <div
         className="fixed inset-0 z-[-1] opacity-[0.015]"
         style={{
